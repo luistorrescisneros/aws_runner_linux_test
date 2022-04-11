@@ -1,1 +1,3 @@
-# aws_runner_linux_test
+# Runner on AWS
+
+Lass uns auf unseren Erfolg anstoßen :beers:
