@@ -13,6 +13,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
+<<<<<<< HEAD
     - name: Checkout repo
       uses: actions/checkout@v3
 
@@ -25,3 +26,11 @@ jobs:
         run: |
           ./jfrog rt c import ${{secrets. JF_ARTIFACTORY_SECRET}}
 
+=======
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name
+
+    - name: Run the Docker image
+      run: docker run my-image-name
+>>>>>>> 538c5b2b51a50c6f19524cfc2082cc42583dd2c5
