@@ -22,4 +22,4 @@ jobs:
 
     - name: Configure the CLI
       run: |
-        ./jfrog config add import ${{secrets. JF_ARTIFACTORY_SECRET}}
+        ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
