@@ -20,7 +20,7 @@ jobs:
           curl -fL https://getcli.jfrog.io | sh
           chmod +x jfrog
 
-    #- name: Configure the CLI
+    #- name: Configure the JFrog CLI
     #  run: |
     #      ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
 
