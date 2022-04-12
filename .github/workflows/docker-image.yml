@@ -23,3 +23,8 @@ jobs:
     - name: Configure the CLI
       run: |
         ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
+
+    - name: Build the docker images
+        run: |
+          docker login luistorrescisneros.jfrog.io -u ${{ secrets. JF_ARTIFACTORY_USER}} -p ${{ secrets. JF_ARTIFACTORY_PASSWORD}}
+          docker build --tag luistorrescisneros.jfrog.io/docker/my-docker-image:latest .
