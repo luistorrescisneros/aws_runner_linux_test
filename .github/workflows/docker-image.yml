@@ -20,9 +20,9 @@ jobs:
           curl -fL https://getcli.jfrog.io | sh
           chmod +x jfrog
 
-    - name: Configure the CLI
-      run: |
-          ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
+    #- name: Configure the CLI
+    #  run: |
+    #      ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
 
     - name: Build the docker images
       run: |
