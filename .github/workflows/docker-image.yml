@@ -24,7 +24,11 @@ jobs:
     #  run: |
     #      ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
 
-    - name: Build the docker images
+    - name: Build Docker-Image
       run: |
-          docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
-          docker build --tag luistorrescisneros.jfrog.io/docker/my-docker-image:latest .
+        docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
+        docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux/my-docker-image:${{ github.run_number }} .
+    
+    - name: Push Docker-Image
+      run: |
+        docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux/my-docker-image:${{ github.run_number }}
