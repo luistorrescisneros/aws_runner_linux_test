@@ -13,14 +13,13 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Setup JFrog CLI
-        run: |
+      run: |
           curl -fL https://getcli.jfrog.io | sh
           chmod +x jfrog
 
     - name: Configure the CLI
-        run: |
-          ./jfrog rt c import ${{secrets. JF_ARTIFACTORY_SECRET}}
+      run: |
+        ./jfrog rt c import ${{secrets. JF_ARTIFACTORY_SECRET}}
