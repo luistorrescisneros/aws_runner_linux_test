@@ -15,25 +15,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup JFrog CLI
-      run: |
-          curl -fL https://getcli.jfrog.io | sh
-          chmod +x jfrog
-
-    #- name: Configure the JFrog CLI
-    #  run: |
-    #      ./jfrog config add ${{secrets. JF_ARTIFACTORY_SECRET}}
-
+    # Build Docker-Image within self-hosted runner
     - name: Build Docker-Image
       run: |
         docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
         docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }} -f docker/Dockerfile .
     
-    # Push to JFrog Registry
+    # Push to Docker-JFrog Registry
     - name: Push Docker-Image
       run: |
         docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }}
 
+    # Run Docker-Image on self-hosted runner
     - name: Run Docker-Image (Print tests results)
       run: |
         docker run luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }}
