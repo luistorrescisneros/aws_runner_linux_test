@@ -19,6 +19,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Print user name
+      run: |
+        echo "$secrets.JF_ARTIFACTORY_USER"
+
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
