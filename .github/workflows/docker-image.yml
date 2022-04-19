@@ -22,7 +22,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
-        username: ${{ secrets.JF_ARTIFACTORY_USER }}
+        username: ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io
         password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
 
     - name: Build and push
