@@ -16,22 +16,22 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.JF_ARTIFACTORY_USER }}
-          password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.JF_ARTIFACTORY_USER }}
+        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          file: docker/Dockerfile
-          context: .
-          push: true
-          tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        file: docker/Dockerfile
+        context: .
+        push: true
+        tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
     # ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
     # Build Docker-Image within self-hosted runner
