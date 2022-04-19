@@ -18,7 +18,7 @@ jobs:
     # Build Docker-Image within self-hosted runner
     - name: Build Docker-Image
       run: |
-        docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }} -f docker/Dockerfile .
+        docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }} -f docker/Dockerfile .
     
     # Push to Docker-JFrog Registry
     - name: Push Docker-Image
