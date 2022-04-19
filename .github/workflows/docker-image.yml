@@ -24,9 +24,9 @@ jobs:
     - name: Push Docker-Image
       run: |
         docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
-        docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }}
+        docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }}
 
     # Run Docker-Image on self-hosted runner
     - name: Run Docker-Image (Print tests results)
       run: |
-        docker run --rm luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }}  
+        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }}  
