@@ -29,4 +29,4 @@ jobs:
     # Run Docker-Image on self-hosted runner
     - name: Run Docker-Image (Print tests results)
       run: |
-        docker run luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }} --rm 
+        docker run --rm luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_number }}  
