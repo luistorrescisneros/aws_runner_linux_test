@@ -8,10 +8,10 @@ on:
 
 jobs:
 
-  env:
-    tag: ${{ github.run_id }}
-
   build:
+
+    env:
+      tag: ${{ github.run_id }}
 
     runs-on: self-hosted
 
