@@ -8,6 +8,9 @@ on:
 
 jobs:
 
+  env:
+    tag: ${{ github.run_id }}
+
   build:
 
     runs-on: self-hosted
@@ -18,15 +21,15 @@ jobs:
     # Build Docker-Image within self-hosted runner
     - name: Build Docker-Image
       run: |
-        docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }} -f docker/Dockerfile .
+        docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }} -f docker/Dockerfile .
     
     # Push to Docker-JFrog Registry
     - name: Push Docker-Image
       run: |
-        docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
-        docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }}
+        docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} --password-stdin ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
+        docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
     # Run Docker-Image on self-hosted runner
     - name: Run Docker-Image (Print tests results)
       run: |
-        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ github.run_id }}  
+        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}  
