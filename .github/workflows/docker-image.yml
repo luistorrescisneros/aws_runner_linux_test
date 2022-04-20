@@ -26,8 +26,8 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
-        registry: login luistorrescisneros.jfrog.io
-        username: ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io
+        registry: luistorrescisneros.jfrog.io
+        username: ${{ secrets.JF_ARTIFACTORY_USER }}
         password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
 
     # Push to Docker-JFrog Registry
