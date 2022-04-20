@@ -16,26 +16,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout
+    - name: Checkout into Runner
       uses: actions/checkout@v3
 
-    - name: Print user name
-      run: |
-        echo "$secrets.JF_ARTIFACTORY_USER"
-
-    - name: Login to DockerHub
+    - name: Login to JFrog-Registry
       uses: docker/login-action@v1 
       with:
         registry: luistorrescisneros.jfrog.io
         username: ${{ secrets.JF_ARTIFACTORY_USER }}
         password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
-
-    # Push to Docker-JFrog Registry
-    
-    #- name: Push Docker-Image
-    #  run: |
-    #    docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
-
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -45,19 +34,7 @@ jobs:
         push: true
         tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
-    # ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
-    # Build Docker-Image within self-hosted runner
-    #- name: Build Docker-Image
-    #  run: |
-    #    docker build --tag luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }} -f docker/Dockerfile .
-    
-    # Push to Docker-JFrog Registry
-    #- name: Push Docker-Image
-    #  run: |
-    #    docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
-    #    docker push luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
-
     # Run Docker-Image on self-hosted runner
-    - name: Run Docker-Image (Print tests results)
-      run: |
-        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}  
+    # - name: Run Docker-Image (Print tests results)
+    #   run: |
+    #    docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}  
