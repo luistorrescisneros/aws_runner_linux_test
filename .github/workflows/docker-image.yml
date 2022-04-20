@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.JF_ARTIFACTORY_USER }}
         password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
 
-    - name: Build and push
+    - name: Build and push Docker-Image
       uses: docker/build-push-action@v2
       with:
         file: docker/Dockerfile
@@ -35,6 +35,7 @@ jobs:
         tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
     # Run Docker-Image on self-hosted runner
-    # - name: Run Docker-Image (Print tests results)
-    #   run: |
-    #    docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}  
+    - name: Run and delete Docker-Image (Print tests results)
+       run: |
+        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
+        docker rmi luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
