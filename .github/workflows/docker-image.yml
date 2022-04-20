@@ -23,16 +23,18 @@ jobs:
       run: |
         echo "$secrets.JF_ARTIFACTORY_USER"
 
-    #- name: Login to DockerHub
-    #  uses: docker/login-action@v1 
-    #  with:
-    #    username: ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io
-    #    password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        registry: login luistorrescisneros.jfrog.io
+        username: ${{ secrets.JF_ARTIFACTORY_USER }}.jfrog.io
+        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
 
     # Push to Docker-JFrog Registry
-    - name: Push Docker-Image
-      run: |
-        docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
+    
+    #- name: Push Docker-Image
+    #  run: |
+    #    docker login luistorrescisneros.jfrog.io -u ${{ secrets.JF_ARTIFACTORY_USER}} -p ${{ secrets.JF_ARTIFACTORY_PASSWORD}}
 
 
     - name: Build and push
