@@ -1,0 +1,27 @@
+{
+  "name": "aws_runner_linux_test",
+  "version": "1.0.0",
+  "description": "Lass uns auf unseren Erfolg anstoßen :beers:",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luistorrescisneros/aws_runner_linux_test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luistorrescisneros/aws_runner_linux_test/issues"
+  },
+  "homepage": "https://github.com/luistorrescisneros/aws_runner_linux_test#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.1"
+  }
+}
