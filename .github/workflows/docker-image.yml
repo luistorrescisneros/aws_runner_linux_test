@@ -24,7 +24,7 @@ jobs:
       with:
         registry: luistorrescisneros.jfrog.io
         username: ${{ secrets.JF_ARTIFACTORY_USER }}
-        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
+        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD_2 }}
 
     - name: Build and push Docker-Image
       uses: docker/build-push-action@v2
