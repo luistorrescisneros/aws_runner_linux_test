@@ -24,7 +24,7 @@ jobs:
       with:
         registry: luistorrescisneros.jfrog.io
         username: ${{ secrets.JF_ARTIFACTORY_USER }}
-        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD }}
+        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD_2 }}
 
     - name: Build and push Docker-Image
       uses: docker/build-push-action@v2
@@ -32,14 +32,14 @@ jobs:
         file: docker/Dockerfile
         context: .
         push: true
-        tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-path/my-docker-image:${{ env.tag }}
+        tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
     # Run and delete Docker-Image on self-hosted runner
     - name: Run and delete Docker-Image (Print tests results)
       run: |
-        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-path/my-docker-image:${{ env.tag }}
+        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
     # Delete Docker-Image
     - name: Delete Docker-Image 
-      post: |
-        docker rmi luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-path/my-docker-image:${{ env.tag }}
+      run: |
+        docker rmi luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
