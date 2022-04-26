@@ -27,7 +27,7 @@ jobs:
         password: ${{ secrets.JF_ARTIFACTORY_PASSWORD_2 }}
 
     # First type on EC2: sudo groupadd docker
-    # Restart Docker
+    # Restart Docker one more time
     - name: Build and push Docker-Image
       uses: docker/build-push-action@v2
       with:
