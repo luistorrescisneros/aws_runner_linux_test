@@ -40,7 +40,7 @@ jobs:
       run: |
         docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
 
-    # Delete Docker-Image
+    # Delete Docker-Image for Matt
     - name: Delete Docker-Image 
       run: |
         docker rmi luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
