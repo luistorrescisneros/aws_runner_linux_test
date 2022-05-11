@@ -10,9 +10,37 @@ jobs:
 
   build:
 
+    env:
+      tag: ${{ github.run_id }}
+
     runs-on: self-hosted
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout into Runner
+      uses: actions/checkout@v3
+
+    - name: Login to JFrog-Registry
+      uses: docker/login-action@v1 
+      with:
+        registry: luistorrescisneros.jfrog.io
+        username: ${{ secrets.JF_ARTIFACTORY_USER }}
+        password: ${{ secrets.JF_ARTIFACTORY_PASSWORD_2 }}
+
+    # Test
+    - name: Build and push Docker-Image
+      uses: docker/build-push-action@v2
+      with:
+        file: docker/Dockerfile
+        context: .
+        push: true
+        tags: luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
+
+    # Run and delete Docker-Image on self-hosted runner
+    - name: Run and delete Docker-Image (Print tests results)
+      run: |
+        docker run --rm --cpus="1.0" luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
+
+    # Delete Docker-Image for Matt
+    - name: Delete Docker-Image 
+      run: |
+        docker rmi luistorrescisneros.jfrog.io/docker-aws-runner-linux-local/my-docker-image:${{ env.tag }}
